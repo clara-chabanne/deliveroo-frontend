@@ -1,0 +1,51 @@
+
+/* -- GÉNÉRAL -------- */
+
+:root {
+    --container-w: 1200px;
+    --white: #FFFFFF;
+    --black: #2E3333;
+    --dark-grey: #868a8a;
+    --light-grey: #f3f5f5;
+}
+
+body {
+    color: var(--black);
+    background-color: var(--light-grey);
+}
+
+.container {
+    max-width: var(--container-w);
+    margin: auto;
+}
+
+/* h1 {
+    
+} */
+
+
+/* -- NAV -------- */
+
+header {
+    background-color: var(--white);
+}
+
+.nav {
+    height: 60px;
+    border-bottom: 1px solid #e9ebeb;
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav-content img {
+    height: 70%;
+}
+
+.header {
+    padding: 30px 0;
+}
