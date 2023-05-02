@@ -9,6 +9,7 @@
     --light-grey: #f3f5f5;
     --disabled: #bac3c3;
     --orange: #FF8001;
+    --green: #00CDBD;
     --meals-cards-gap: 20px;
     --meals-col-gap: 30px;
 }
@@ -22,6 +23,42 @@ body {
     max-width: var(--container-w);
     margin: auto;
 }
+
+.price {
+    min-width: fit-content;
+}
+
+button {
+    background-color: var(--green);
+    color: var(--white);
+    width: fit-content;
+    padding: 16px 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button.disabled {
+    background-color: var(--disabled);
+    color: var(--dark-grey);
+}
+
+button.disabled:hover {
+    cursor: not-allowed;
+}
+
+
+
+
+
+
+/* -- POLICES -------- */
 
 h1 {
     font-family: "Stratos Deliveroo Web", sans-serif;
@@ -41,13 +78,6 @@ h3 {
 p {
     font-family: "IBM Plex Sans", sans-serif;
     font-size: 16px;
-    color: var(--dark-grey);
-}
-
-.price {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 16px;
-    color: var(--dark-grey);  
 }
 
 .baseline {
@@ -58,7 +88,35 @@ p {
 }
 
 
-/* -- NAV -------- */
+
+
+
+
+/* -- APP COMPONENT -------- */
+
+.meals-cart {
+    display: flex;
+    padding: 40px 0;
+    gap: var(--meals-col-gap)
+}
+
+.col-gauche {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.col-droite {
+    width: 30%;
+}
+
+
+
+
+
+
+/* -- NAV COMPONENT -------- */
 
 header {
     background-color: var(--white);
@@ -107,18 +165,7 @@ header {
 
 
 
-.meals-cart {
-    display: flex;
-    padding: 40px 0;
-    gap: var(--meals-col-gap)
-}
-
-.col-gauche {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-}
+/* -- SECTION COMPONENT -------- */
 
 .meal-category {
     display: flex;
@@ -131,6 +178,13 @@ header {
     flex-wrap: wrap;
     gap: var(--meals-cards-gap)
 }
+
+
+
+
+
+
+/* -- MEAL COMPONENT -------- */
 
 .meal-card {
     display: flex;
@@ -163,6 +217,7 @@ header {
     max-height: 2.6rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--dark-grey);
 }
 
 .meal-card img {
@@ -180,7 +235,7 @@ header {
     gap: 10px;
 }
 
-.popular {
+.meal-card .popular {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -190,24 +245,21 @@ header {
     color: var(--orange);  
 }
 
-.popular .icon {
-    margin-top: -2px;
+.meal-card .popular .icon {
+    /* margin-top: -2px; */
     font-size: 20px;
 }
 
 
 
 
-.col-droite {
-    width: 30%;
-}
+
+
+/* -- CART COMPONENT -------- */
 
 .cart {
-    /* width: calc((1200px / 100) * 30); */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* gap: 50px; */
     background-color: var(--white);
     padding: 12px;
     border-radius: 8px;
@@ -216,25 +268,86 @@ header {
     z-index: 2;
 }
 
-button.disabled {
-    background-color: var(--disabled);
-    color: var(--dark-grey);
-    border: none;
-    border-radius: 5px;
-}
-
-button.disabled:hover {
-    cursor: not-allowed;
-}
-
 .cart button {
     width: 100%;
-    padding: 16px 0;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 17px;
-    font-weight: 700;
 }
 
-.cart p {
-    padding: 50px 0;
+.empty-cart-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+}
+
+.cart > div:not(:last-child) {
+    padding: 26px 0;
+    border-bottom: solid 1px var(--disabled);
+}
+
+.cart > div:last-child {
+    padding: 26px 0 14px;
+}
+
+.products {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-height: 436px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.subtotal {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: var(--black) !important;
+}
+
+.subtotal > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--black) !important;
+    font-family: system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+/* -- CART PRODUCT LINE COMPONENT -------- */
+
+.product-line {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+}
+
+.product-line p {
+    color: var(--black);
+}
+
+.product-line p:first-of-type {
+    flex: 1;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.counter .icon {
+    font-size: 24px;
+    color: var(--green);
 }

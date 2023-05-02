@@ -4,10 +4,12 @@ import axios from "axios";
 import Nav from "./components/Nav";
 import Header from "./components/Header";
 import Section from "./components/Section";
+import Cart from "./components/Cart";
 
 function App() {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [chosenMeals, setChosenMeals] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,17 +38,12 @@ function App() {
       <main>
         <div className="meals-cart container">
           <div className="col-gauche">
-            <Section categories={data.categories} />
+            <Section categories={data.categories} chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
           </div>
 
           <div className="col-droite">
-            <div className="cart">
-              <button className="disabled">Valider mon panier</button>
-              <p>Votre panier est vide</p>
-            </div>
+            <Cart chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
           </div>
-
-          <span>Hello</span>
         </div>
       </main>
 

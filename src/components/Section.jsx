@@ -1,6 +1,6 @@
 import Meal from "./Meal";
 
-const Section = ({ categories }) => {
+const Section = ({ categories, chosenMeals, setChosenMeals }) => {
   return (
     <>
       {categories.map((category) => {
@@ -10,7 +10,7 @@ const Section = ({ categories }) => {
               <h2>{category.name}</h2>
 
               <div className="meals-div">
-                <Meal meals={category.meals} />
+                <Meal meals={category.meals} chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
               </div>
             </section>
           )
