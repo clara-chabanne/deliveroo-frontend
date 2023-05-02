@@ -1,8 +1,14 @@
 const Header = ({ restaurant, categories }) => {
-  console.log("restaurant  =>", restaurant.name);
-  console.log("categories  =>", categories);
+  return (
+    <div className="restaurant container">
+      <div className="description">
+        <h1>{restaurant.name}</h1>
+        <p className="baseline">{restaurant.description}</p>
+      </div>
 
-  // return <h2>{restaurant.name}</h2>;
+      <img src={restaurant.picture} alt="" />
+    </div>
+  );
 };
 
 export default Header;

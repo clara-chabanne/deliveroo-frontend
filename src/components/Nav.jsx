@@ -1,6 +1,6 @@
 import logo from "../assets/img/logo-teal.svg";
 
-const Nav = ({}) => {
+const Nav = () => {
   return (
     <div className="nav">
       <div className="nav-content container">

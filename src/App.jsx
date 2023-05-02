@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Nav from "./components/Nav";
 import Header from "./components/Header";
+import Section from "./components/Section";
 
 function App() {
   const [data, setData] = useState();
@@ -15,7 +16,7 @@ function App() {
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
     fetchData();
@@ -32,7 +33,20 @@ function App() {
         <Header restaurant={data.restaurant} categories={data.categories} />
       </header>
 
-      <main></main>
+      <main>
+        <div className="meals-cart container">
+          <div className="col-gauche">
+            <Section categories={data.categories} />
+          </div>
+
+          <div className="col-droite">
+            <div className="cart">
+              <button className="disabled">Valider mon panier</button>
+              <p>Votre panier est vide</p>
+            </div>
+          </div>
+        </div>
+      </main>
 
       <footer></footer>
     </>
