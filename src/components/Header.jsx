@@ -6,7 +6,7 @@ const Header = ({ restaurant, categories }) => {
         <p className="baseline">{restaurant.description}</p>
       </div>
 
-      <img src={restaurant.picture} alt="" />
+      <img src={restaurant.picture} alt="Brunch avec tartines d'avocat et de saumon" />
     </div>
   );
 };
