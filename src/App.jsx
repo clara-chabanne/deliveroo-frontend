@@ -45,8 +45,6 @@ function App() {
               <p>Votre panier est vide</p>
             </div>
           </div>
-
-          <span>Hello</span>
         </div>
       </main>
 

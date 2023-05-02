@@ -4,6 +4,8 @@ const Section = ({ categories }) => {
   return (
     <>
       {categories.map((category) => {
+        console.log(category);
+
         return (
           category.meals.length > 1 && (
             <section className="meal-category" key={category.name}>
