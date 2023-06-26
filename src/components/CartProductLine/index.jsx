@@ -1,6 +1,17 @@
-import roundedPrice from "../utils/roundedPrice";
+/* ------------ IMPORTS ------------ */
 
+// Utils
+import roundedPrice from "../../utils/roundedPrice";
+/*
+
+
+------------ COMPONENT ------------ */
 const CartProductLine = ({ chosenMeals, setChosenMeals, index }) => {
+  /* 
+  
+  -- JS ---- */
+
+  // Counter
   const meal = chosenMeals[index];
   const price = meal.price * meal.qty;
 
@@ -21,19 +32,22 @@ const CartProductLine = ({ chosenMeals, setChosenMeals, index }) => {
 
     setChosenMeals(chosenMealsCopy);
   };
-
+  /*
+  
+  
+  -- RETURN ---- */
   return (
     <>
-      <div className="product-line">
-        <div className="counter">
-          <span className="icon icon-minus" onClick={handleQtyMinus}></span>
+      <div className="flex-start flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <span className="icon-minus text-2xl text-main" onClick={handleQtyMinus}></span>
           <p>{meal.qty}</p>
-          <span className="icon icon-plus" onClick={handleQtyPlus}></span>
+          <span className="icon-plus text-2xl text-main" onClick={handleQtyPlus}></span>
         </div>
 
-        <p>{meal.title}</p>
+        <p className="flex-1">{meal.title}</p>
 
-        <p className="price">{roundedPrice(price)}</p>
+        <p>{roundedPrice(price)}</p>
       </div>
     </>
   );

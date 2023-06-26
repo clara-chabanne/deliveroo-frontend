@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply w-fit rounded-md border-none py-3 font-ibm text-17 font-bold hover:cursor-pointer;
+  }
+
+  .btn.primary {
+    @apply bg-main text-white;
+  }
+
+  .btn.disabled {
+    @apply bg-disabled text-darkGrey hover:cursor-not-allowed dark:bg-darkTheme-disabled dark:text-darkTheme-darkGrey;
+  }
+
+  .btn.btn-number {
+    @apply relative flex flex-row items-center justify-center;
+  }
+}
+
+.light {
+  @apply bg-lightGrey text-black transition-all;
+}
+
+.dark {
+  @apply bg-darkTheme-lightBlack text-darkTheme-white transition-all;
+}
+
+.loading-div {
+  @apply flex min-h-screen items-center justify-center;
+}
+
+/* -- POLICES -------- */
+
+h1 {
+  @apply font-stratos text-h1;
+}
+
+h2 {
+  @apply font-stratos text-h2;
+}
+
+h3 {
+  @apply font-ibm text-h3;
+}
+
+p {
+  @apply font-ibm text-base;
+}
+
+.baseline {
+  @apply font-ibm text-19 leading-[30px] text-darkGrey dark:text-darkTheme-white;
+}

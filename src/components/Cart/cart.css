@@ -1,0 +1,17 @@
+/* -- CART COMPONENT -------- */
+
+.cart {
+  @apply sticky top-cartTop z-10 flex max-h-[calc(100vh-(theme(inset.cartTop)*2))] flex-col rounded-lg bg-white p-3 text-black dark:bg-darkTheme-black dark:text-darkTheme-white;
+}
+
+.products {
+  @apply flex max-h-[430px] flex-col gap-7 overflow-hidden overflow-y-scroll;
+}
+
+.subtotal {
+  @apply flex flex-col gap-3 border-b border-solid py-6;
+}
+
+.total {
+  @apply flex items-center justify-between font-systemUi text-[20px] font-semibold;
+}
