@@ -4,7 +4,7 @@
 import "../cart.css";
 
 // Hooks
-import { useState, useContext, memo } from "react";
+import { useState, useContext, memo, useEffect } from "react";
 
 // Internal components
 import CartContent from "../CartContent";
@@ -29,6 +29,18 @@ const BottomCart = () => {
 
   // States
   const [showCart, setShowCart] = useState(false);
+  const [chosenMealsQuantity, setChosenMealsQuantity] = useState(0);
+
+  // Get chosenMealsQuantity
+  useEffect(() => {
+    let chosenMealsQuantity = 0;
+
+    for (let i = 0; i < chosenMeals.length; i++) {
+      chosenMealsQuantity = chosenMealsQuantity + chosenMeals[i].qty;
+    }
+
+    setChosenMealsQuantity(chosenMealsQuantity);
+  }, [chosenMeals]);
   /*
   
   
@@ -62,7 +74,7 @@ const BottomCart = () => {
         }}>
         {chosenMeals.length > 0 && (
           <div className="absolute left-4 flex h-[60%] items-center justify-center rounded-md bg-white p-3 text-main">
-            {chosenMeals.length}
+            {chosenMealsQuantity}
           </div>
         )}
         Voir mon panier
