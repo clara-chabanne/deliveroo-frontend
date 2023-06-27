@@ -1,5 +1,14 @@
+/* ------------ IMPORTS ------------ */
+
+// CSS
 import "./footer.css";
 
+// Hooks
+import { memo } from "react";
+/*
+
+
+------------ COMPONENT ------------ */
 const Footer = () => {
   return (
     <footer>
@@ -8,4 +17,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

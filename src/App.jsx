@@ -1,10 +1,10 @@
 /* ------------ IMPORTS ------------ */
 
 // CSS
-import "./global.css";
+import "./assets/css/global.css";
 
 // Hooks
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // Axios
 import axios from "axios";
@@ -16,11 +16,13 @@ import PulseLoader from "react-spinners/PulseLoader";
 import Nav from "./components/Nav/index";
 import Header from "./components/Header/index";
 import Section from "./components/Section/index";
-import Cart from "./components/Cart/index";
-import CartBottom from "./components/BottomCart";
+import CartCard from "./components/Cart/CartCard/index";
+import BottomCart from "./components/Cart/BottomCart/index";
 import Footer from "./components/Footer/index";
 
-export const ThemeContext = createContext(null);
+// Theme context
+import { ThemeContext } from "./context/themeContext";
+import { MealsContext } from "./context/mealsContext";
 /*
 
 
@@ -30,24 +32,16 @@ function App() {
   
   -- JS ---- */
 
-  // General states
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [chosenMeals, setChosenMeals] = useState([]);
-
   // Theme
-  const [theme, setTheme] = useState("light");
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-    if (theme === "light") {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  };
+  const { theme, setTheme } = useContext(ThemeContext);
+  const { data, setData } = useContext(MealsContext);
+
+  // States
+  const [isLoading, setIsLoading] = useState(true);
 
   // Get theme in localStorage
   useEffect(() => {
+    console.log("App useEffect - local storage");
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
       setTheme(storedTheme);
@@ -58,10 +52,11 @@ function App() {
 
   // Fetch meals data
   useEffect(() => {
+    console.log("App useEffect - fetch data");
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/`);
-        setData(response.data);
+        const { data } = await axios.get("restaurantData.json");
+        setData(data);
         setIsLoading(false);
       } catch (error) {
         console.log(error.message);
@@ -74,38 +69,35 @@ function App() {
   
   -- RETURN ---- */
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div id={theme} className={theme}>
-        {isLoading ? (
-          <div className="loading-div">
-            <PulseLoader height={30} width={4} loading={isLoading} color="#00cdbd" />
-          </div>
-        ) : (
-          <>
-            <header className="bg-white dark:bg-darkTheme-black">
-              <Nav />
-              <Header restaurant={data.restaurant} categories={data.categories} />
-            </header>
+    <div id={theme} className={theme}>
+      {isLoading ? (
+        <div className="loading-div">
+          <PulseLoader height={30} width={4} loading={isLoading} color="#00cdbd" />
+        </div>
+      ) : (
+        <>
+          <header className="bg-white dark:bg-darkTheme-black">
+            <Nav />
+            <Header restaurant={data.restaurant} categories={data.categories} />
+          </header>
 
-            <main>
-              <div className="container mx-auto flex w-websiteWidth gap-7 pb-14 pt-10">
-                <div className="flex basis-full flex-col gap-14 lg:basis-7/10">
-                  <Section categories={data.categories} chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
-                </div>
+          <main>
+            <div className="container mx-auto flex w-websiteWidth gap-7 pb-14 pt-10">
+              {/* Left column */}
+              <Section />
 
-                <div className="hidden min-w-[350px] lg:block lg:basis-3/10">
-                  <Cart chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
-                </div>
-              </div>
+              {/* Right column - Only after lg breakpoint */}
+              <CartCard />
+            </div>
 
-              <CartBottom chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
-            </main>
+            {/* BottomCart - Only before lg breakpoint */}
+            <BottomCart />
+          </main>
 
-            <Footer />
-          </>
-        )}
-      </div>
-    </ThemeContext.Provider>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 }
 

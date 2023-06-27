@@ -1,3 +1,5 @@
+/* -- FOOTER COMPONENT -------- */
+
 footer {
   @apply flex h-[8vh] min-h-[60px] items-center justify-center bg-white text-black dark:bg-darkTheme-black dark:text-darkTheme-white;
 }

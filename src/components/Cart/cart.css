@@ -1,17 +1,21 @@
 /* -- CART COMPONENT -------- */
 
-.cart {
+.cart-card {
   @apply sticky top-cartTop z-10 flex max-h-[calc(100vh-(theme(inset.cartTop)*2))] flex-col rounded-lg bg-white p-3 text-black dark:bg-darkTheme-black dark:text-darkTheme-white;
 }
 
+.cart-bottom {
+  @apply sticky bottom-0 z-10 flex h-fit max-h-[80vh] w-full flex-col gap-2 overflow-scroll bg-white p-6 shadow-cartBottom dark:bg-darkTheme-black lg:hidden;
+}
+
 .products {
-  @apply flex max-h-[430px] flex-col gap-7 overflow-hidden overflow-y-scroll;
+  @apply flex max-h-[430px] min-h-[50px] flex-col gap-4 overflow-hidden overflow-y-scroll lg:gap-7;
 }
 
 .subtotal {
-  @apply flex flex-col gap-3 border-b border-solid py-6;
+  @apply mt-3 flex flex-col gap-3 border-b border-t border-solid border-darkWhite py-2 dark:border-darkTheme-darkGrey lg:py-6;
 }
 
 .total {
-  @apply flex items-center justify-between font-systemUi text-[20px] font-semibold;
+  @apply flex items-center justify-between py-2 font-systemUi text-[20px] font-semibold lg:pb-1 lg:pt-6;
 }

@@ -1,8 +1,32 @@
-import MealCard from "../MealCard/index";
+/* ------------ IMPORTS ------------ */
 
-const Section = ({ categories, chosenMeals, setChosenMeals }) => {
+// Hooks
+import { useContext, memo } from "react";
+
+// Internal components
+import MealCards from "../MealCards/index";
+
+// Context
+import { MealsContext } from "../../context/mealsContext";
+/*
+
+
+------------ COMPONENT ------------ */
+const Section = () => {
+  /* 
+  
+  -- JS ---- */
+
+  // Context
+  const {
+    data: { categories },
+  } = useContext(MealsContext);
+  /*
+  
+  
+  -- RETURN ---- */
   return (
-    <>
+    <div className="flex basis-full flex-col gap-14 lg:basis-7/10">
       {categories.map((category) => {
         return (
           category.meals.length > 1 && (
@@ -10,14 +34,14 @@ const Section = ({ categories, chosenMeals, setChosenMeals }) => {
               <h2>{category.name}</h2>
 
               <div className="flex flex-wrap gap-mealsCardsGap">
-                <MealCard meals={category.meals} chosenMeals={chosenMeals} setChosenMeals={setChosenMeals} />
+                <MealCards meals={category.meals} />
               </div>
             </section>
           )
         );
       })}
-    </>
+    </div>
   );
 };
 
-export default Section;
+export default memo(Section);

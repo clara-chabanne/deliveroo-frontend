@@ -1,18 +1,24 @@
 /* ------------ IMPORTS ------------ */
 
-// CSS
-import "./meal-card.css";
+// Hooks
+import { useContext, memo } from "react";
 
 // Utils
 import roundedPrice from "../../utils/roundedPrice";
+
+// Context
+import { MealsContext } from "../../context/mealsContext";
 /*
 
 
 ------------ COMPONENT ------------ */
-const MealCard = ({ meals, chosenMeals, setChosenMeals }) => {
+const MealCard = ({ meal }) => {
   /* 
   
   -- JS ---- */
+
+  // Meals context
+  const { chosenMeals, setChosenMeals } = useContext(MealsContext);
 
   // Function on card clic
   const handleChoosenMeal = (meal) => {
@@ -32,43 +38,38 @@ const MealCard = ({ meals, chosenMeals, setChosenMeals }) => {
   
   -- RETURN ---- */
   return (
-    <>
-      {meals.map((meal) => {
-        return (
-          <div
-            className="meal-card"
-            key={meal.id}
-            onClick={() => {
-              handleChoosenMeal(meal);
-            }}>
-            <div className={`meal-card-content ${meal.description.length > 5 ? "justify-between" : "justify-start"}`}>
-              <h3>{meal.title}</h3>
+    <div
+      className="meal-card"
+      onClick={() => {
+        handleChoosenMeal(meal);
+      }}>
+      {/* Text */}
+      <div className={`meal-card-content ${meal.description.length > 5 ? "justify-between" : "justify-start"}`}>
+        <h3>{meal.title}</h3>
 
-              {meal.description && <p className="description">{meal.description}</p>}
+        {meal.description && <p className="description">{meal.description}</p>}
 
-              <div className="flex items-center gap-2.5">
-                <p className="text-17 text-darkGrey">{roundedPrice(meal.price)}</p>
-                {meal.popular && (
-                  <div className="popular">
-                    <span className="icon-STAR_FILL text-[20px]"></span>
-                    <span>Populaire</span>
-                  </div>
-                )}
-              </div>
+        <div className="flex items-center gap-2.5">
+          <p className="text-17 text-darkGrey">{roundedPrice(meal.price)}</p>
+          {meal.popular && (
+            <div className="popular">
+              <span className="icon-STAR_FILL text-[20px]"></span>
+              <span>Populaire</span>
             </div>
+          )}
+        </div>
+      </div>
 
-            {meal.picture && (
-              <img
-                src={meal.picture}
-                alt={meal.title}
-                className="h-[130px] w-[130px] shrink-0 rounded-md object-cover object-center-bottom"
-              />
-            )}
-          </div>
-        );
-      })}
-    </>
+      {/* Picture */}
+      {meal.picture && (
+        <img
+          src={meal.picture}
+          alt={meal.title}
+          className="h-[130px] w-[130px] shrink-0 rounded-md object-cover object-center-bottom"
+        />
+      )}
+    </div>
   );
 };
 
-export default MealCard;
+export default memo(MealCard);

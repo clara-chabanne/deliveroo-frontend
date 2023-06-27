@@ -3,12 +3,15 @@
 // CSS
 import "./nav.css";
 
-// Theme context
-import { useContext } from "react";
-import { ThemeContext } from "../../App";
+// Hooks
+import { useContext, memo } from "react";
 
 // External components
 import { Switch } from "@headlessui/react";
+
+// Context
+import { ThemeContext } from "../../context/themeContext";
+import { MealsContext } from "../../context/mealsContext";
 
 // Images
 import logo from "../../assets/img/logo-teal.svg";
@@ -24,8 +27,19 @@ const Nav = () => {
   
   -- JS ---- */
 
-  // Theme context
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  // Context
+  const { theme, setTheme } = useContext(ThemeContext);
+  const { setChosenMeals } = useContext(MealsContext);
+
+  // Set theme in localStorage on switch change
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    if (theme === "light") {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  };
   /*
   
   
@@ -34,7 +48,14 @@ const Nav = () => {
     <div className="nav">
       <div className="container mx-auto flex h-full w-websiteWidth items-center justify-between">
         {/* Logo */}
-        <img src={logo} alt="logo-deliveroo" className="h-[64%]" />
+        <img
+          src={logo}
+          alt="logo-deliveroo"
+          className="h-[64%] hover:cursor-pointer"
+          onClick={() => {
+            setChosenMeals([]);
+          }}
+        />
 
         {/* Switch */}
         <Switch checked={theme === "dark"} onChange={toggleTheme} className="theme-switch">
@@ -47,4 +68,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default memo(Nav);
